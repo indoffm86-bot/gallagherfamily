@@ -1,5 +1,5 @@
 @echo off
-title GALLAGHER Web Server & Live Tunnel
+title GALLAGHER Web Server - Live Tunnel
 echo ===================================================
 echo   GALLAGHER Web Server is Starting...
 echo   Domain: https://gallagherfamily.serveousercontent.com
