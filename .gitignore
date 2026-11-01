@@ -3,3 +3,4 @@ node_modules/
 *.log
 .DS_Store
 gallagherfamily.zip
+push-to-github.bat
