@@ -1,10 +1,7 @@
 services:
   - type: web
     name: gallagherfamily
-    env: node
+    runtime: node
     plan: free
     buildCommand: npm install
     startCommand: node server.js
-    envVars:
-      - key: PORT
-        value: 3000
