@@ -1,0 +1,46 @@
+{
+  "siteSettings": {
+    "gangName": "GALLAGHER",
+    "tagline": "-",
+    "welcomeText": "Welcome To Gallagher Home",
+    "aboutTitle": "เกี่ยวกับ GALLAGHER",
+    "aboutText": "-",
+    "fanpageUrl": "https://www.facebook.com/share/1HJeUBLUGJ/",
+    "discordUrl": "https://discord.gg",
+    "bgImage": "/uploads/1793478039104_mijkhu.gif",
+    "musicTitle": "你的答案",
+    "musicArtist": "阿冗",
+    "musicUrl": "/uploads/1793447287031_wqvyfn.mp3",
+    "footerCopyright": "© 2026 DEXER. All rights reserved.",
+    "footerCredit": "Created with ❤️ by gon_gallagher"
+  },
+  "adminUser": {
+    "username": "Dev",
+    "passwordHash": "$2b$10$2XAkNLFv7xzmAghUBMo2Ku4/gQfxrAHZTG9PaWEG5xQm4WJOQm2Jq"
+  },
+  "members": [
+    {
+      "id": "mem_1793451408083",
+      "name": "BOONPERM GALLAGHER",
+      "role": "MEMBER",
+      "subTitle": "Team B : สายฟาม",
+      "description": "เงียบๆ ไม่เทียบใคร",
+      "avatar": "/uploads/1793451340053_tot2nk.jpg",
+      "instagram": "",
+      "facebook": "",
+      "order": 2
+    },
+    {
+      "id": "mem_1793474196005",
+      "name": "Kevin Gallagher",
+      "role": "LEADER",
+      "subTitle": "Team B : สายฟาม",
+      "description": "กรรมใดใครก่อกรรมดอชักว่าว",
+      "avatar": "/uploads/1793474061092_fzwzsj.jpg",
+      "instagram": "",
+      "facebook": "",
+      "discord": "",
+      "order": 1
+    }
+  ]
+}

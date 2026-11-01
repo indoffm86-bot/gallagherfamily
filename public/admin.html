@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | WINLAND Management</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+  <!-- ================= AUTH GATEWAY (DISGUISED ACCESS) ================= -->
+  <div class="auth-gateway" id="authGateway">
+    <div class="auth-box">
+      <div class="auth-lock-icon">
+        <i class="fa-solid fa-shield-halved"></i>
+      </div>
+      <h2 class="auth-title">ADMINISTRATOR</h2>
+      <p class="auth-desc">ระบบควบคุมหลังบ้านเฉพาะเจ้าของเว็บไซต์เท่านั้น</p>
+
+      <div id="gateErrorMsg" style="color: #ef4444; font-size: 0.88rem; margin-bottom: 15px; display: none;"></div>
+
+      <form id="gateLoginForm" style="display: flex; flex-direction: column; gap: 14px; text-align: left;">
+        <div class="form-group-admin">
+          <label>ชื่อผู้ใช้ (Username)</label>
+          <input type="text" class="input-admin" id="gateUser" placeholder="กรอกชื่อผู้ใช้" required autocomplete="off">
+        </div>
+        <div class="form-group-admin">
+          <label>รหัสผ่าน (Password)</label>
+          <input type="password" class="input-admin" id="gatePass" placeholder="กรอกรหัสผ่าน" required>
+        </div>
+        <button type="submit" class="btn-admin-primary" style="justify-content: center; margin-top: 10px;">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          <span>เข้าสู่ระบบหลังบ้าน</span>
+        </button>
+        <a href="/" style="color: var(--text-dim); font-size: 0.82rem; text-align: center; text-decoration: none; margin-top: 10px;">
+          ← กลับหน้าแรก
+        </a>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= MAIN ADMIN DASHBOARD ================= -->
+  <div class="admin-layout" id="adminLayout" style="display: none;">
+    
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="brand-badge">
+        <div class="brand-logo-icon" id="sidebarLogoIcon">W</div>
+        <div>
+          <div class="brand-title" id="sidebarGangName">WINLAND</div>
+          <div class="brand-sub">CONTROL PANEL</div>
+        </div>
+      </div>
+
+      <ul class="nav-menu">
+        <li class="nav-item active" data-tab="tab-settings">
+          <i class="fa-solid fa-sliders"></i>
+          <span>ตั้งค่าเว็บไซต์ทั่วไป</span>
+        </li>
+        <li class="nav-item" data-tab="tab-members">
+          <i class="fa-solid fa-users-gear"></i>
+          <span>จัดการสมาชิก</span>
+        </li>
+        <li class="nav-item" data-tab="tab-media">
+          <i class="fa-solid fa-music"></i>
+          <span>เพลงและสื่อมีเดีย</span>
+        </li>
+        <li class="nav-item" data-tab="tab-security">
+          <i class="fa-solid fa-key"></i>
+          <span>ความปลอดภัย & รหัสผ่าน</span>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <a href="/" target="_blank" class="btn-sidebar btn-visit">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          <span>ดูหน้าเว็บจริง</span>
+        </a>
+        <button class="btn-sidebar btn-logout" id="logoutBtn">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>ออกจากระบบ</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      
+      <!-- ================= TAB 1: GENERAL SETTINGS ================= -->
+      <section class="tab-content active" id="tab-settings">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">⚙️ ตั้งค่าเว็บไซต์ทั่วไป</h1>
+            <p class="page-desc">ปรับเปลี่ยนข้อความ โลโก้ และเนื้อหาหน้าแรกทั้งหมดได้แบบเรียลไทม์</p>
+          </div>
+          <button class="btn-admin-primary" id="saveGeneralSettingsBtn">
+            <i class="fa-solid fa-floppy-disk"></i>
+            <span>บันทึกการเปลี่ยนแปลง</span>
+          </button>
+        </div>
+
+        <div class="card-panel">
+          <h3 class="card-title"><i class="fa-solid fa-heading"></i> ข้อมูลหลักหน้าแรก</h3>
+          <p class="card-desc">ส่วนหัวและข้อความต้อนรับของกลุ่ม</p>
+
+          <div class="form-grid">
+            <div class="form-group-admin">
+              <label>ชื่อแก๊งค์ / โลโก้ (Gang Name)</label>
+              <input type="text" class="input-admin" id="settingGangName" placeholder="เช่น WINLAND">
+              <span class="field-desc">แสดงเป็นตัวอักษรขนาดใหญ่บนหน้าหลัก</span>
+            </div>
+
+            <div class="form-group-admin">
+              <label>สโลแกน (Tagline Badge)</label>
+              <input type="text" class="input-admin" id="settingTagline" placeholder="เช่น BORN OF WARGANG">
+              <span class="field-desc">ป้ายสโลแกนเหนือชื่อกลุ่ม</span>
+            </div>
+
+            <div class="form-group-admin" style="grid-column: 1 / -1;">
+              <label>ข้อความต้อนรับ (Welcome Subtitle)</label>
+              <input type="text" class="input-admin" id="settingWelcome" placeholder="เช่น Welcome To Winland Home">
+            </div>
+          </div>
+        </div>
+
+        <div class="card-panel">
+          <h3 class="card-title"><i class="fa-solid fa-book-open"></i> ข้อมูล About Us (ประวัติความเป็นมา)</h3>
+          <p class="card-desc">เนื้อหาที่จะแสดงเมื่อกดดูประวัติความเป็นมาของกลุ่ม</p>
+
+          <div class="form-grid">
+            <div class="form-group-admin" style="grid-column: 1 / -1;">
+              <label>หัวข้อ About Us</label>
+              <input type="text" class="input-admin" id="settingAboutTitle" placeholder="เช่น เกี่ยวกับ WINLAND">
+            </div>
+
+            <div class="form-group-admin" style="grid-column: 1 / -1;">
+              <label>เนื้อหาประวัติความเป็นมา</label>
+              <textarea class="input-admin" id="settingAboutText" placeholder="เขียนเรื่องราว ความเป็นมา อุดมการณ์ของกลุ่มที่นี่..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-panel">
+          <h3 class="card-title"><i class="fa-solid fa-share-nodes"></i> โซเชียลมีเดียและลิงก์ติดต่อ</h3>
+          <p class="card-desc">ลิงก์ที่จะเปิดเมื่อกดปุ่มติดต่อแฟนเพจ</p>
+
+          <div class="form-grid">
+            <div class="form-group-admin">
+              <label>ลิงก์ Facebook แฟนเพจ</label>
+              <input type="url" class="input-admin" id="settingFanpage" placeholder="https://facebook.com/...">
+            </div>
+
+            <div class="form-group-admin">
+              <label>ลิงก์ Discord (ถ้ามี)</label>
+              <input type="url" class="input-admin" id="settingDiscord" placeholder="https://discord.gg/...">
+            </div>
+          </div>
+        </div>
+
+        <div class="card-panel">
+          <h3 class="card-title"><i class="fa-solid fa-copyright"></i> ข้อมูลเครดิตและท้ายหน้า (Footer)</h3>
+          
+          <div class="form-grid">
+            <div class="form-group-admin">
+              <label>ข้อความ Copyright</label>
+              <input type="text" class="input-admin" id="settingCopyright" placeholder="© 2026 WINLAND. All rights reserved.">
+            </div>
+
+            <div class="form-group-admin">
+              <label>ข้อความเครดิตผู้สร้าง</label>
+              <input type="text" class="input-admin" id="settingCredit" placeholder="Created with ❤️ by Niranam Dev">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 2: MEMBERS MANAGEMENT ================= -->
+      <section class="tab-content" id="tab-members">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">👥 จัดการสมาชิกแก๊งค์</h1>
+            <p class="page-desc">เพิ่ม แก้ไข ลบ และจัดลำดับสมาชิกในแต่ละยศตำแหน่ง</p>
+          </div>
+          <button class="btn-admin-primary" id="openAddMemberBtn">
+            <i class="fa-solid fa-user-plus"></i>
+            <span>เพิ่มสมาชิกใหม่</span>
+          </button>
+        </div>
+
+        <div class="card-panel">
+          <div class="member-list-admin" id="adminMembersList">
+            <!-- Members Injected via JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 3: MEDIA & MUSIC ================= -->
+      <section class="tab-content" id="tab-media">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">🎵 เพลงและสื่อมีเดีย</h1>
+            <p class="page-desc">จัดการเพลงประกอบหน้าเว็บและรูปภาพพื้นหลัง</p>
+          </div>
+          <button class="btn-admin-primary" id="saveMediaSettingsBtn">
+            <i class="fa-solid fa-floppy-disk"></i>
+            <span>บันทึกการเปลี่ยนแปลง</span>
+          </button>
+        </div>
+
+        <div class="card-panel">
+          <h3 class="card-title"><i class="fa-solid fa-image"></i> รูปภาพพื้นหลังเว็บไซต์ (Background Image)</h3>
+          <p class="card-desc">ใส่ URL รูปภาพ หรือกดอัปโหลดไฟล์รูปภาพจากเครื่องได้ทันที</p>
+
+          <div class="form-group-admin">
+            <div class="upload-row">
+              <img id="bgPreviewThumb" src="" class="preview-thumb" alt="Preview">
+              <input type="text" class="input-admin" id="settingBgImage" placeholder="https://... หรืออัปโหลดไฟล์">
+              <label class="btn-upload-file">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <span>อัปโหลดรูป</span>
+                <input type="file" id="bgFileInput" accept="image/*" style="display: none;">
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-panel">
+          <h3 class="card-title"><i class="fa-solid fa-compact-disc"></i> เครื่องเล่นเพลงหน้าแรก (Music Player)</h3>
+          <p class="card-desc">เพลงที่เล่นเป็นแบ็คกราวด์ สามารถใส่ URL หรืออัปโหลดไฟล์ .mp3 ได้</p>
+
+          <div class="form-grid">
+            <div class="form-group-admin">
+              <label>ชื่อเพลง (Song Title)</label>
+              <input type="text" class="input-admin" id="settingMusicTitle" placeholder="เช่น One Of The Girls">
+            </div>
+
+            <div class="form-group-admin">
+              <label>ศิลปิน (Artist)</label>
+              <input type="text" class="input-admin" id="settingMusicArtist" placeholder="เช่น THE WEEKND, JENNIE">
+            </div>
+
+            <div class="form-group-admin" style="grid-column: 1 / -1;">
+              <label>ไฟล์เสียงเพลง (Audio URL หรือ อัปโหลด .mp3)</label>
+              <div class="upload-row">
+                <input type="text" class="input-admin" id="settingMusicUrl" placeholder="https://... หรืออัปโหลดไฟล์เสียง">
+                <label class="btn-upload-file">
+                  <i class="fa-solid fa-file-audio"></i>
+                  <span>อัปโหลดไฟล์เสียง</span>
+                  <input type="file" id="musicFileInput" accept="audio/*" style="display: none;">
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 4: SECURITY & ACCOUNT ================= -->
+      <section class="tab-content" id="tab-security">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">🔒 บัญชีและความปลอดภัย</h1>
+            <p class="page-desc">เปลี่ยนชื่อผู้ใช้และรหัสผ่านสำหรับเข้าสู่ระบบหลังบ้าน</p>
+          </div>
+        </div>
+
+        <div class="card-panel" style="max-width: 600px;">
+          <h3 class="card-title"><i class="fa-solid fa-user-shield"></i> เปลี่ยนรหัสผ่านแอดมิน</h3>
+          <p class="card-desc">เพื่อความปลอดภัย แนะนำให้เปลี่ยนรหัสผ่านเป็นของคุณเอง</p>
+
+          <form id="changePasswordForm" style="display: flex; flex-direction: column; gap: 16px;">
+            <div class="form-group-admin">
+              <label>ชื่อผู้ใช้ใหม่ (Username)</label>
+              <input type="text" class="input-admin" id="newAdminUser" placeholder="ชื่อผู้ใช้ใหม่" required>
+            </div>
+
+            <div class="form-group-admin">
+              <label>รหัสผ่านปัจจุบัน (Current Password)</label>
+              <input type="password" class="input-admin" id="currentPass" placeholder="กรอกรหัสผ่านปัจจุบัน" required>
+            </div>
+
+            <div class="form-group-admin">
+              <label>รหัสผ่านใหม่ (New Password)</label>
+              <input type="password" class="input-admin" id="newPass" placeholder="รหัสผ่านใหม่อย่างน้อย 6 ตัวอักษร" required>
+            </div>
+
+            <button type="submit" class="btn-admin-primary" style="margin-top: 10px;">
+              <i class="fa-solid fa-lock"></i>
+              <span>อัปเดตรหัสผ่านใหม่</span>
+            </button>
+          </form>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ================= ADD / EDIT MEMBER MODAL ================= -->
+  <div class="modal-admin-backdrop" id="memberModal">
+    <div class="modal-admin-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h3 class="card-title" id="memberModalTitle">เพิ่มสมาชิกใหม่</h3>
+        <button class="btn-icon-admin" id="closeMemberModalBtn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <form id="memberForm" style="display: flex; flex-direction: column; gap: 16px;">
+        <input type="hidden" id="editMemberId">
+
+        <div class="form-group-admin">
+          <label>ชื่อสมาชิก *</label>
+          <input type="text" class="input-admin" id="memName" placeholder="เช่น John Winland" required>
+        </div>
+
+        <div class="form-grid" style="grid-template-columns: 1fr 1fr;">
+          <div class="form-group-admin">
+            <label>ยศ / บทบาท *</label>
+            <select class="input-admin" id="memRole">
+              <option value="FOUNDER">👑 FOUNDER</option>
+              <option value="LEADER">⭐ LEADER</option>
+              <option value="MEMBER" selected>👤 MEMBER</option>
+            </select>
+          </div>
+
+          <div class="form-group-admin">
+            <label>ฉายา / ตำแหน่งย่อย</label>
+            <input type="text" class="input-admin" id="memSubtitle" placeholder="เช่น THE BOSS, PLAYER">
+          </div>
+        </div>
+
+        <div class="form-group-admin">
+          <label>รูปโปรไฟล์สมาชิก (URL หรืออัปโหลด)</label>
+          <div class="upload-row">
+            <img id="avatarPreviewThumb" src="" class="preview-thumb" alt="Avatar">
+            <input type="text" class="input-admin" id="memAvatar" placeholder="https://... หรืออัปโหลดไฟล์">
+            <label class="btn-upload-file">
+              <i class="fa-solid fa-upload"></i>
+              <span>เลือกรูป</span>
+              <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group-admin">
+          <label>คำอธิบายสั้นๆ / Bio</label>
+          <textarea class="input-admin" id="memDesc" placeholder="เขียนคำอธิบายเกี่ยวกับสมาชิกคนนี้..."></textarea>
+        </div>
+
+        <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+          <div class="form-group-admin">
+            <label><i class="fa-brands fa-instagram" style="color: #e1306c;"></i> Instagram URL</label>
+            <input type="url" class="input-admin" id="memInstagram" placeholder="https://instagram.com/...">
+          </div>
+
+          <div class="form-group-admin">
+            <label><i class="fa-brands fa-facebook" style="color: #1877f2;"></i> Facebook URL</label>
+            <input type="url" class="input-admin" id="memFacebook" placeholder="https://facebook.com/...">
+          </div>
+
+          <div class="form-group-admin">
+            <label><i class="fa-brands fa-discord" style="color: #5865f2;"></i> Discord URL / Link</label>
+            <input type="url" class="input-admin" id="memDiscord" placeholder="https://discord.gg/...">
+          </div>
+        </div>
+
+        <button type="submit" class="btn-admin-primary" style="margin-top: 12px; justify-content: center;">
+          <i class="fa-solid fa-check"></i>
+          <span>บันทึกข้อมูลสมาชิก</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-notice" id="toastNotice">
+    <i class="fa-solid fa-circle-check" id="toastIcon"></i>
+    <span id="toastMsg">บันทึกสำเร็จ</span>
+  </div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>

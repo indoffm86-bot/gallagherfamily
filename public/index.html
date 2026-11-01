@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WINLAND | Official Gang Home</title>
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Dynamic Background with Dark Cinematic Overlay -->
+  <div class="bg-stage" id="bgStage"></div>
+  <div class="bg-overlay"></div>
+
+  <!-- Audio Element -->
+  <audio id="bgAudio" loop preload="auto">
+    <source id="audioSource" src="" type="audio/mpeg">
+  </audio>
+
+  <!-- Main View Container -->
+  <div class="app-container">
+    
+    <!-- Top Bar with Admin Login Entry -->
+    <div class="top-nav">
+      <button class="admin-entry-btn" id="secretBtn" title="เข้าสู่ระบบหลังบ้าน (Admin Panel)">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span>ระบบหลังบ้าน</span>
+      </button>
+    </div>
+
+    <!-- Hero Centerpiece -->
+    <section class="hero-section">
+      <!-- Tagline Pill -->
+      <div class="tagline-pill">
+        <span class="dot"></span>
+        <span id="siteTagline">BORN OF WARGANG</span>
+      </div>
+
+      <!-- Animated Big Logo with Typewriter Effect & Blinking Cursor -->
+      <div class="hero-logo-box">
+        <h1 class="hero-logo-text" id="siteLogo">
+          <span id="typewriterText">GALLAGHER</span><span class="typewriter-cursor">|</span>
+        </h1>
+      </div>
+
+      <!-- Welcome Subtitle -->
+      <p class="hero-subtitle" id="siteWelcome">Welcome To Winland Home</p>
+
+      <!-- Action Buttons -->
+      <div class="hero-actions">
+        <button class="btn btn-primary" id="openMembersBtn">
+          <i class="fa-solid fa-users"></i>
+          <span>รายชื่อสมาชิก</span>
+        </button>
+
+        <a href="#" target="_blank" class="btn btn-glass" id="fanpageLink">
+          <i class="fa-brands fa-facebook"></i>
+          <span>ติดต่อแฟนเพจ</span>
+        </a>
+      </div>
+
+      <!-- About Us Trigger Card -->
+      <div class="about-card-trigger" id="openAboutBtn">
+        <div class="about-icon-box">
+          <i class="fa-solid fa-book-open"></i>
+        </div>
+        <div class="about-text-group">
+          <div class="about-label">ABOUT US</div>
+          <div class="about-sublabel">อ่านประวัติความเป็นมาของเรา</div>
+        </div>
+        <div class="about-arrow">
+          <i class="fa-solid fa-arrow-right"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Bar (Footer info) -->
+    <div class="bottom-bar">
+      <div class="footer-info">
+        <span id="footerCopyright" class="footer-secret-trigger">© 2026 WINLAND. All rights reserved.</span>
+        <span id="footerCredit">Created with ❤️ by Niranam Dev</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= FIXED FLOATING CONTROLS DOCK ================= -->
+  <!-- Always stays fixed at bottom right, tracking as you scroll up and down -->
+  <aside class="fixed-floating-dock" id="floatingDock" aria-label="Media & Display Controls">
+    
+    <!-- 1. Floating Music Player Pill -->
+    <div class="music-player-pill" id="musicPlayerPill">
+      <!-- Spinning Vinyl Disc -->
+      <div class="music-vinyl-box" id="musicVinyl">
+        <div class="vinyl-disc">
+          <div class="vinyl-groove"></div>
+          <div class="vinyl-center"></div>
+        </div>
+      </div>
+
+      <!-- Song Info -->
+      <div class="music-info-box">
+        <div class="music-title-row">
+          <span class="music-title" id="playerTitle">你的答案</span>
+          <!-- Animated Sound Wave Dots (....) -->
+          <div class="sound-waves" id="soundWaves">
+            <span class="sound-bar"></span>
+            <span class="sound-bar"></span>
+            <span class="sound-bar"></span>
+            <span class="sound-bar"></span>
+          </div>
+        </div>
+        <span class="music-artist" id="playerArtist">阿冗</span>
+      </div>
+
+      <!-- Volume Control Slider Popup -->
+      <div class="volume-control-wrap" id="volumeControlWrap">
+        <button class="volume-btn" id="volumeBtn" type="button" title="ปรับระดับเสียง / ปิดเสียง (คลิกเพื่อเปิด หรือใช้ลูกกลิ้งเมาส์)">
+          <i class="fa-solid fa-volume-high" id="volumeIcon"></i>
+        </button>
+        <div class="volume-slider-popup" id="volumePopup">
+          <div class="volume-header">
+            <span class="volume-title"><i class="fa-solid fa-volume-high" style="color: #00d4ff;"></i> ระดับเสียง</span>
+            <span class="volume-pct" id="volumePct">70%</span>
+          </div>
+
+          <div class="volume-slider-row">
+            <button type="button" class="vol-step-btn" id="volDownBtn" title="ลดเสียง">
+              <i class="fa-solid fa-minus"></i>
+            </button>
+            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="0.7">
+            <button type="button" class="vol-step-btn" id="volUpBtn" title="เพิ่มเสียง">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+
+          <div class="volume-presets">
+            <button type="button" class="vol-preset-btn" data-vol="0">ปิดเสียง</button>
+            <button type="button" class="vol-preset-btn" data-vol="0.3">30%</button>
+            <button type="button" class="vol-preset-btn active" data-vol="0.7">70%</button>
+            <button type="button" class="vol-preset-btn" data-vol="1">100%</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Big Play / Pause Ring Button -->
+      <button class="music-play-btn-ring" id="playAudioBtn" type="button" title="เล่น / หยุดเพลง">
+        <span class="play-btn-inner">
+          <i class="fa-solid fa-play" id="playIcon"></i>
+        </span>
+      </button>
+    </div>
+
+    <!-- 2. UI ปรับความสว่างพื้นหลัง & หน้าต่างป๊อปอัพ (อยู่ฝั่งขวาของ UI เพลง แต่ไม่ชิดกันมาก) -->
+    <div class="brightness-control-pill" id="brightnessPill">
+      <button class="brightness-toggle-btn" id="brightnessToggleBtn" type="button" title="ปรับความสว่างพื้นหลัง & ป๊อปอัพ">
+        <i class="fa-solid fa-sun" id="brightnessIcon"></i>
+      </button>
+
+      <!-- Brightness Slider Popup -->
+      <div class="brightness-slider-popup" id="brightnessPopup">
+        <div class="brightness-header">
+          <div class="brightness-title">
+            <i class="fa-solid fa-sun-plant-wilt"></i>
+            <span>ความสว่าง</span>
+          </div>
+          <span class="brightness-percent-val" id="brightnessPctDisplay">100%</span>
+        </div>
+
+        <div class="brightness-slider-row">
+          <i class="fa-regular fa-sun" style="font-size: 0.75rem; color: #888;"></i>
+          <input type="range" class="brightness-slider" id="brightnessSlider" min="30" max="170" step="1" value="100">
+          <i class="fa-solid fa-sun" style="font-size: 0.95rem; color: #ffb800;"></i>
+        </div>
+
+        <div class="brightness-presets">
+          <button type="button" class="preset-pill-btn" data-bright="60">มืด</button>
+          <button type="button" class="preset-pill-btn active" data-bright="100">ปกติ</button>
+          <button type="button" class="preset-pill-btn" data-bright="145">สว่าง</button>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ================= ABOUT US MODAL ================= -->
+  <div class="modal-backdrop" id="aboutModal">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="closeAboutBtn" type="button" aria-label="Close modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="modal-badge">
+        <i class="fa-solid fa-circle-info"></i>
+        <span>ABOUT US</span>
+      </div>
+      <h2 class="modal-title" id="modalAboutTitle">เกี่ยวกับ WINLAND</h2>
+      <p class="modal-body-text" id="modalAboutText">
+        กำเนิดขึ้นจาก Wargang Global และกำลังเดินทางต่อ... สังคมแห่งเกียรติยศและมิตรภาพที่แท้จริง
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= MEMBERS FULL-SCREEN VIEW ================= -->
+  <div class="members-view" id="membersView">
+    <div class="members-header">
+      <button class="members-back-btn" id="closeMembersBtn">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>ย้อนกลับ</span>
+      </button>
+
+      <h2 class="members-main-title">GANG MEMBERS</h2>
+      <p class="members-sub-title">รายชื่อของแก๊งค์ <span id="membersGangSub">WINLAND</span></p>
+
+      <!-- Search & Filters -->
+      <div class="members-controls">
+        <div class="search-box-wrap">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" class="search-input" id="memberSearchInput" placeholder="ค้นหาชื่อสมาชิก...">
+        </div>
+
+        <div class="filter-pills">
+          <button class="filter-btn active" data-filter="ALL">ทั้งหมด</button>
+          <button class="filter-btn" data-filter="FOUNDER">FOUNDER</button>
+          <button class="filter-btn" data-filter="LEADER">LEADER</button>
+          <button class="filter-btn" data-filter="MEMBER">MEMBER</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Members Cards Grid -->
+    <div class="members-grid" id="membersGrid">
+      <!-- Dynamic Members Injected via JS -->
+    </div>
+  </div>
+
+  <!-- ================= BACKEND LOGIN MODAL ================= -->
+  <div class="modal-backdrop backend-modal" id="loginModal">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="closeLoginBtn" type="button" aria-label="Close modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 6px;">
+        <i class="fa-solid fa-shield-halved" style="color: #00d4ff; font-size: 1.5rem;"></i>
+        <h2 class="modal-title" style="letter-spacing: 1.5px; margin: 0;">BACKEND LOGIN</h2>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 20px;">เข้าสู่ระบบจัดการข้อมูลเว็บไซต์หลังบ้าน</p>
+
+      <div class="error-message" id="loginErrorMsg"></div>
+
+      <form class="backend-form" id="loginForm">
+        <div class="form-group">
+          <label><i class="fa-solid fa-user" style="margin-right: 6px; color: #9da3af;"></i> Username</label>
+          <input type="text" class="form-input" id="loginUser" placeholder="กรอกชื่อผู้ใช้แอดมิน" required autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label><i class="fa-solid fa-key" style="margin-right: 6px; color: #9da3af;"></i> Password</label>
+          <input type="password" class="form-input" id="loginPass" placeholder="กรอกรหัสผ่าน" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn-submit-blue">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          <span>เข้าสู่ระบบหลังบ้าน</span>
+        </button>
+      </form>
+
+      <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.08); text-align: center;">
+        <a href="/admin" class="direct-admin-link">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          <span>เปิดหน้าต่างหลังบ้านเต็มรูปแบบ (/admin)</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Frontend Logic Scripts -->
+  <script src="/js/main.js"></script>
+</body>
+</html>
